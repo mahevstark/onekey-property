@@ -18,10 +18,7 @@ export default function AnimatedStats() {
           <AnimateIn key={stat.label} delay={i * 0.1}>
             <div className="text-center">
               <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent-light bg-clip-text text-transparent mb-2">
-                <CountUp
-                  end={stat.value}
-                  suffix={stat.suffix}
-                />
+                <CountUp end={stat.value} suffix={stat.suffix} />
               </p>
               <p className="text-gray-medium font-medium text-sm uppercase tracking-wide">
                 {stat.label}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 type AnimateInProps = {
   children: React.ReactNode;
@@ -11,11 +11,11 @@ type AnimateInProps = {
 };
 
 const offsets = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { y: 0, x: -40 },
-  right: { y: 0, x: 40 },
-  none: { y: 0, x: 0 },
+  up: "translate(0, 40px)",
+  down: "translate(0, -40px)",
+  left: "translate(-40px, 0)",
+  right: "translate(40px, 0)",
+  none: "translate(0, 0)",
 };
 
 export default function AnimateIn({
@@ -25,17 +25,37 @@ export default function AnimateIn({
   className = "",
   duration = 0.6,
 }: AnimateInProps) {
-  const offset = offsets[direction];
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-50px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: offset.x, y: offset.y }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration, delay, ease: "easeOut" }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translate(0, 0)" : offsets[direction],
+        transition: `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s`,
+        willChange: "opacity, transform",
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
