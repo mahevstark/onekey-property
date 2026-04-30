@@ -27,9 +27,10 @@ export default function AnimatedPageHero({ title, subtitle, image }: AnimatedPag
         alt={title}
         fill
         priority
+        fetchPriority="high"
         className="object-cover"
         sizes="100vw"
-        quality={75}
+        quality={60}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/90 via-primary/80 to-primary/70" />
 

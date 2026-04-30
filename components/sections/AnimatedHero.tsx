@@ -9,15 +9,16 @@ export default function AnimatedHero() {
   useEffect(() => setShow(true), []);
 
   return (
-    <section className="relative overflow-hidden min-h-[90vh] flex items-center">
+    <section className="relative overflow-hidden min-h-[80vh] md:min-h-[90vh] flex items-center">
       <Image
         src="/hero-home.jpg"
         alt="Modern property"
         fill
         priority
+        fetchPriority="high"
         className="object-cover"
         sizes="100vw"
-        quality={75}
+        quality={60}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/90 via-primary/75 to-primary-light/50" />
 
