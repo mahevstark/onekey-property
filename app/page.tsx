@@ -6,6 +6,7 @@ import CTABanner from "@/components/ui/CTABanner";
 import AnimateIn from "@/components/ui/AnimateIn";
 import AnimatedHero from "@/components/sections/AnimatedHero";
 import AnimatedStats from "@/components/sections/AnimatedStats";
+import TrustLogos from "@/components/sections/TrustLogos";
 import { ShieldIcon, ClockIcon, PoundIcon, HeartIcon, KeyIcon, WrenchIcon, ChartIcon } from "@/components/ui/Icons";
 
 export default function HomePage() {
@@ -71,6 +72,8 @@ export default function HomePage() {
           </AnimateIn>
         </div>
       </section>
+
+      <TrustLogos />
 
       <CTABanner
         title="Ready to Let Your Property?"
